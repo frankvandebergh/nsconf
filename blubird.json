@@ -1,4 +1,4 @@
-
+{
 "settings" : {
   "name" : "Blubird default",
   "version" : "1.0"
@@ -411,3 +411,4 @@
         "childdiscovery" : [{}]
     }
 ]
+}
