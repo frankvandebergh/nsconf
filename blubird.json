@@ -1,0 +1,413 @@
+
+"settings" : {
+  "name" : "Blubird default",
+  "version" : "1.0"
+},
+"parseconfig" : [
+    {
+        "objecttype" : "general",
+        "groupname" : "General",
+        "identifier" : "#NS(.*)",
+        "pattern" : "#NS{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "nsip",
+        "groupname" : "Network: IP",
+        "identifier" : "add ns ip (.*)",
+        "pattern" : "add ns ip {name} {subnet} {optional}",
+        "visible" : true,
+        "childdiscovery" : [{}]
+    },
+    {
+        "objecttype" : "lbvserver",
+        "groupname" : "LB: Virtual Server",
+        "identifier" : "add lb vserver (.*)",
+        "pattern" : "add lb vserver {name} {protocol} {IP} {port} {optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "lbvserver_servicegroup_binding",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+        },
+        {
+            "type" : "lbvserver_binding",
+            "childproperty" : "lbvserver",
+            "parentproperty" : "name"
+        },
+        {
+            "type" : "nsip",
+            "childproperty" : "name",
+            "parentproperty" : "IP"
+        },
+        {
+            "type" : "sslvserver",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+        },
+        {
+            "type" : "nstcpprofile",
+            "childproperty" : "name",
+            "parentproperty" : "tcpProfileName"
+        },
+        {
+            "type" : "lbvserver",
+            "childproperty" : "name",
+            "parentproperty" : "backupVServer"
+        }
+    ]
+  },
+    {
+        "objecttype" : "csvserver",
+        "groupname" : "CS: Virtual Server",
+        "identifier" : "add cs vserver (.*)",
+        "pattern" : "add cs vserver {name} {protocol} {IP} {port} {optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "csvserver_cspolicy_binding",
+            "childproperty" : "csvserver",
+            "parentproperty" : "name"
+        },
+        {
+            "type" : "nsip",
+            "childproperty" : "name",
+            "parentproperty" : "IP"
+        },
+        {
+            "type" : "sslvserver",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+        },
+        {
+            "type" : "nstcpprofile",
+            "childproperty" : "name",
+            "parentproperty" : "tcpProfileName"
+        }
+    ]
+    },
+
+    {
+        "objecttype" : "lbmonitor",
+        "groupname" : "LB: Monitor",
+        "identifier" : "add lb monitor (.*)",
+        "pattern" : "add lb monitor {name} {type}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+
+    {
+        "objecttype" : "csvserver_cspolicy_binding",
+        "groupname" : "CS: Policy Binding",
+        "identifier" : "bind cs vserver (.*) -policyname (.*) -targetLBVServer (.*) -priority (.*)",
+        "pattern" : "bind cs vserver {csvserver} -policyname {name} -targetLBVserver {lbvserver} -priority {priority}",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "cspolicy",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+        },
+        {
+            "type" : "lbvserver",
+            "childproperty" : "name",
+            "parentproperty" : "lbvserver"
+        }]
+    },
+
+    {
+        "objecttype" : "cspolicy",
+        "groupname" : "CS: Policy",
+        "identifier" : "add cs policy (.*)",
+        "pattern" : "add cs policy {name} -rule {rule}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "lbvserver",
+            "childproperty" : "name",
+            "parentproperty" : "targetLBVserver"
+        }]
+
+    },
+
+    {
+        "objecttype" : "server",
+        "groupname" : "LB: Server",
+        "identifier" : "add server (.*)",
+        "pattern" : "add server {name} {IP}{optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+
+    {
+        "objecttype" : "policystringmap",
+        "groupname" : "AppExpert: Stringmap",
+        "identifier" : "add policy stringmap (.*)",
+        "pattern" : "add policy stringmap {name}{optional}",
+        "visible": true,
+        "childdiscovery" : [{
+            "type" : "policystringmap_pattern_binding",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+        }]
+    },
+
+    {
+        "objecttype" : "policypatset",
+        "groupname" : "AppExpert: Pattern Set",
+        "identifier" : "add policy patset (.*)",
+        "pattern" : "add policy patset {name}{optional}",
+        "visible": true,
+        "childdiscovery" : [{
+            "type" : "policypatset_pattern_binding",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+        }]
+    },
+
+    {
+        "objecttype" : "policystringmap_pattern_binding",
+        "groupname" : "AppExpert: Stringmap content",
+        "identifier" : "bind policy stringmap (.*)",
+        "pattern" : "bind policy stringmap {name} {key} {value}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+
+    {
+        "objecttype" : "policypatset_pattern_binding",
+        "groupname" : "AppExpert: Pattern Set content",
+        "identifier" : "bind policy patset (.*)",
+        "pattern" : "bind policy patset {name} {pattern} -index {index}{optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+
+    {
+        "objecttype" : "policyexpression",
+        "groupname" : "AppExpert: Expression",
+        "identifier" : "add policy expression (.*)",
+        "pattern" : "add policy expression {name} {expression}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+
+    {
+        "objecttype" : "nstcpprofile",
+        "groupname" : "Profiles: TCP Profile",
+        "identifier" : "add ns tcpProfile (.*)",
+        "pattern" : "add ns tcpProfile {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+
+    {
+        "objecttype" : "sslprofile",
+        "groupname" : "Profiles: SSL Profile",
+        "identifier" : "add ssl profile (.*)",
+        "pattern" : "add ssl profile {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+
+        {
+            "objecttype" : "sslcertkey",
+            "groupname" : "SSL: Certificate",
+            "identifier" : "add ssl certKey (.*)",
+            "pattern" : "add ssl certKey {name} -cert {cert}{optional}",
+            "visible": true,
+            "childdiscovery" : [{
+
+            }]
+        },
+
+
+    {
+        "objecttype" : "sslvserver",
+        "groupname" : "SSL: Virtual Server",
+        "identifier" : "set ssl vserver (.*)",
+        "pattern" : "set ssl vserver {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+            "type" : "sslprofile",
+            "childproperty" : "name",
+            "parentproperty" : "sslProfile"
+        },{
+            "type" : "sslcertkey",
+            "childproperty" : "name",
+            "parentproperty" : "certkeyName"
+        }]
+    },
+
+    {
+        "objecttype" : "sslservicegroup",
+        "groupname" : "SSL: Service Group",
+        "identifier" : "set ssl serviceGroup (.*)",
+        "pattern" : "set ssl serviceGroup {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+            "type" : "sslprofile",
+            "childproperty" : "name",
+            "parentproperty" : "sslProfile"
+        }]
+    },
+
+    {
+        "objecttype" : "servicegroup",
+        "groupname" : "LB: Service Group",
+        "identifier" : "add serviceGroup (.*)",
+        "pattern" : "add servicegroup {name} {servicetype}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "servicegroup_servicegroupmember_binding",
+            "childproperty" : "servicegroupname",
+            "parentproperty" : "name"
+        },{
+            "type" : "servicegroup_lbmonitor_binding",
+            "childproperty" : "servicegroupname",
+            "parentproperty" : "name"
+        },{
+            "type" : "ssslservicegroup",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+        }
+    ]
+    },
+
+    {
+        "objecttype" : "service_lbmonitor_binding",
+        "groupname" : "LB: Service monitor binding",
+        "identifier" : "bind service (.*) -monitorName (.*)",
+        "pattern" : "bind service {servicegroupname} -monitorName {monitor}",
+        "visible": false,
+        "childdiscovery" : [{
+            "type" : "lbmonitor",
+            "childproperty" : "name",
+            "parentproperty" : "monitor"
+        }]
+    },
+
+    {
+        "objecttype" : "servicegroup_lbmonitor_binding",
+        "groupname" : "LB: Service Group monitor binding",
+        "identifier" : "bind serviceGroup (.*) -monitorName (.*)",
+        "pattern" : "bind serviceGroup {servicegroupname} -monitorName {monitor}",
+        "visible": false,
+        "childdiscovery" : [{
+            "type" : "lbmonitor",
+            "childproperty" : "name",
+            "parentproperty" : "monitor"
+        }]
+    },
+
+    {
+        "objecttype" : "servicegroup_servicegroupmember_binding",
+        "groupname" : "LB: Service Group srv binding",
+        "identifier" : "bind serviceGroup (.*)",
+        "pattern" : "bind servicegroup {servicegroupname} {server} {port}",
+        "visible": false,
+        "childdiscovery" : [{
+            "type" : "server",
+            "childproperty" : "name",
+            "parentproperty" : "server"
+        }]
+    },
+
+    {
+        "objecttype" : "lbvserver_binding",
+        "groupname" : "LB: Virtual Server policy binding",
+        "identifier" : "bind lb vserver (.*) -policyName (.*) -priority (.*) -gotoPriorityExpression (.*) -type REQUEST",
+        "pattern" : "bind lb vserver {lbvserver} -policyName {policy} -priority {priority} -gotoPriorityExpression {goto} -type REQUEST",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "responderpolicy",
+            "childproperty" : "name",
+            "parentproperty" : "policy"
+        },{
+            "type" : "rewritepolicy",
+            "childproperty" : "name",
+            "parentproperty" : "policy"
+        }]
+    },
+
+    {
+        "objecttype" : "lbvserver_servicegroup_binding",
+        "groupname" : "LB: Virtual Server svg binding",
+        "identifier" : "bind lb vserver (.*)",
+        "pattern" : "bind lb vserver {name} {svc}",
+        "visible" : false,
+        "childdiscovery" : [{
+            "type" : "servicegroup",
+            "childproperty" : "name",
+            "parentproperty" : "svc"
+        },{
+            "type" : "service",
+            "childproperty" : "name",
+            "parentproperty" : "svc"
+        }]
+    },
+
+    {
+        "objecttype" : "responderpolicy",
+        "groupname" : "AppExpert: Responder Policy",
+        "identifier" : "add responder policy (.*)",
+        "pattern" : "add responder policy {name} {rule} {action}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "responderaction",
+            "childproperty" : "name",
+            "parentproperty" : "action"
+        }]
+    },
+
+    {
+        "objecttype" : "responderaction",
+        "groupname" : "AppExpert: Responder Action",
+        "identifier" : "add responder action (.*)",
+        "pattern" : "add responder action {name} {type} {optional}",
+        "visible" : true,
+        "childdiscovery" : [{}]
+    },
+
+    {
+        "objecttype" : "rewritepolicy",
+        "groupname" : "AppExpert: Rewrite Policy",
+        "identifier" : "add rewrite policy (.*)",
+        "pattern" : "add rewrite policy {name} {rule} {action}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "rewriteaction",
+            "childproperty" : "name",
+            "parentproperty" : "action"
+        }]
+    },
+
+    {
+        "objecttype" : "rewriteaction",
+        "groupname" : "AppExpert: Rewrite Action",
+        "identifier" : "add rewrite action (.*)",
+        "pattern" : "add rewrite action {name} {type} {optional}",
+        "visible" : true,
+        "childdiscovery" : [{}]
+    },
+    {
+        "objecttype" : "_Unmatched",
+        "groupname" : "~Unmatched entries",
+        "identifier" : "(.*)",
+        "pattern" : "{name}",
+        "visible" : true,
+        "childdiscovery" : [{}]
+    }
+]
