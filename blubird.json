@@ -126,9 +126,26 @@
             "type" : "lbvserver",
             "childproperty" : "name",
             "parentproperty" : "targetLBVserver"
-        }]
+        },
+        {
+            "type" : "csaction",
+            "childproperty" : "name",
+            "parentproperty" : "action"
+        }
+      ]
 
-    },
+    },{
+    "objecttype" : "csaction",
+    "groupname" : "CS: Action",
+    "identifier" : "add cs action (.*)",
+    "pattern" : "add cs action {name} -targetLBVserver {targetLBVserver}{optional}",
+    "visible" : true,
+    "childdiscovery" : [{
+        "type" : "lbvserver",
+        "childproperty" : "name",
+        "parentproperty" : "targetLBVserver"
+    }]
+  },
 
     {
         "objecttype" : "server",
