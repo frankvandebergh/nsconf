@@ -134,10 +134,11 @@
         }
       ]
 
-    },{
+    },
+    {
     "objecttype" : "csaction",
     "groupname" : "CS: Action",
-    "identifier" : "add cs action (.*)",
+    "identifier" : "add cs action (.*) -targetLBVserver (.*)",
     "pattern" : "add cs action {name} -targetLBVserver {targetLBVserver}{optional}",
     "visible" : true,
     "childdiscovery" : [{
