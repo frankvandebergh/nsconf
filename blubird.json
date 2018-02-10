@@ -14,6 +14,124 @@
         }]
     },
     {
+        "objecttype" : "nsmode",
+        "groupname" : "Modes",
+        "identifier" : "enable ns mode (.*)",
+        "pattern" : "enable ns mode {name}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "interface",
+        "groupname" : "Network: Interface",
+        "identifier" : "set interface (.*)",
+        "pattern" : "set interface {name} {optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "channel",
+        "groupname" : "Network: Channel",
+        "identifier" : "set channel (.*)",
+        "pattern" : "set channel {name} {optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "vlan",
+        "groupname" : "Network: VLAN",
+        "identifier" : "add vlan (.*)",
+        "pattern" : "add vlan {name}{optional}",
+        "visible" : true,
+        "childdiscovery" : [
+          {
+          "type" : "vlan_interface_binding",
+          "childproperty" : "name",
+          "parentproperty" : "name"
+        },
+        {
+        "type" : "vlan_nsip_binding",
+        "childproperty" : "name",
+        "parentproperty" : "name"
+      }
+      ]
+    },
+    {
+        "objecttype" : "vlan_interface_binding",
+        "groupname" : "Network: VLAN INT binding",
+        "identifier" : "bind vlan (.*) -ifnum (.*)",
+        "pattern" : "bind vlan {name} -ifnum {interface}{optional}",
+        "visible" : false,
+        "childdiscovery" : [{
+          "type" : "interface",
+          "childproperty" : "name",
+          "parentproperty" : "interface"
+        }]
+    },
+    {
+        "objecttype" : "vlan_nsip_binding",
+        "groupname" : "Network: VLAN IP binding",
+        "identifier" : "bind vlan (.*) -IPAddress (.*)",
+        "pattern" : "bind vlan {name} -IPAddress {nsip} {subnet}",
+        "visible" : false,
+        "childdiscovery" : [{
+          "type" : "nsip",
+          "childproperty" : "name",
+          "parentproperty" : "nsip"
+        }]
+    },
+    {
+        "objecttype" : "nsfeature",
+        "groupname" : "Features",
+        "identifier" : "enable ns feature (.*)",
+        "pattern" : "enable ns feature {name}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "snmpcommunity",
+        "groupname" : "SNMP: Community",
+        "identifier" : "add snmp community (.*)",
+        "pattern" : "add snmp community {name} {permission}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "snmpmanager",
+        "groupname" : "SNMP: Manager",
+        "identifier" : "add snmp manager (.*)",
+        "pattern" : "add snmp manager {name}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "snmpalarm",
+        "groupname" : "SNMP: Alarm",
+        "identifier" : "set snmp alarm (.*)",
+        "pattern" : "set snmp alarm {name} {optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "snmptrap",
+        "groupname" : "SNMP: Trap",
+        "identifier" : "add snmp trap (.*)",
+        "pattern" : "add snmp trap {type} {name} -communityName {community}",
+        "visible" : true,
+        "childdiscovery" : [{
+          "type" : "snmpcommunity",
+          "childproperty" : "name",
+          "parentproperty" : "community"
+        }]
+    },
+    {
         "objecttype" : "nsip",
         "groupname" : "Network: IP",
         "identifier" : "add ns ip (.*)",
@@ -225,6 +343,18 @@
         "pattern" : "add ns tcpProfile {name} {optional}",
         "visible": true,
         "childdiscovery" : [{
+          "type" : "nstcpprofile_set",
+          "childproperty" : "name",
+          "parentproperty" : "name"
+        }]
+    },
+    {
+        "objecttype" : "nstcpprofile_set",
+        "groupname" : "Profiles: TCP Profile Settings",
+        "identifier" : "set ns tcpProfile (.*)",
+        "pattern" : "set ns tcpProfile {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
 
         }]
     },
@@ -239,6 +369,58 @@
 
         }]
     },
+    {
+        "objecttype" : "auditmessageaction",
+        "groupname" : "Audit: message action",
+        "identifier" : "add audit messageaction (.*)",
+        "pattern" : "add audit messageaction {name} {level} {action} -bypassSafetyCheck {bypassSafetyCheck}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "sslservicegroup_ecccurve_binding",
+        "groupname" : "SSL: Servicegroup ECCCurve Binding",
+        "identifier" : "bind ssl servicegroup (.*) -eccCurveName (.*)",
+        "pattern" : "bind ssl servicegroup {servicegroup} -eccCurveName {name}",
+        "visible": false,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "dnsnameserver",
+        "groupname" : "DNS: Name Server",
+        "identifier" : "add dns nameServer (.*)",
+        "pattern" : "add dns nameServer {name}{optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "auditsyslogaction",
+        "groupname" : "Audit: Syslog Action",
+        "identifier" : "add audit syslogAction (.*)",
+        "pattern" : "add audit syslogAction {name} {server} -logLevel {loglevel} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "auditsyslogpolicy",
+        "groupname" : "Audit: Syslog Policy",
+        "identifier" : "add audit syslogPolicy (.*)",
+        "pattern" : "add audit syslogPolicy {name} {policy} {action}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "auditsyslogaction",
+          "childproperty" : "name",
+          "parentproperty" : "action"
+        }]
+    },
 
         {
             "objecttype" : "sslcertkey",
@@ -247,6 +429,22 @@
             "pattern" : "add ssl certKey {name} -cert {cert}{optional}",
             "visible": true,
             "childdiscovery" : [{
+              "type" : "sslcertlink",
+              "childproperty" : "name",
+              "parentproperty" : "name"
+
+            }]
+        },
+        {
+            "objecttype" : "sslcertlink",
+            "groupname" : "SSL: Certificate Link",
+            "identifier" : "link ssl certKey (.*)",
+            "pattern" : "link ssl certKey {name} {cacert}",
+            "visible": true,
+            "childdiscovery" : [{
+              "type" : "sslcertkey",
+              "childproperty" : "name",
+              "parentproperty" : "cacert"
 
             }]
         },
@@ -263,11 +461,26 @@
             "childproperty" : "name",
             "parentproperty" : "sslProfile"
         },{
-            "type" : "sslcertkey",
+            "type" : "sslvserver_sslcertkey_binding",
             "childproperty" : "name",
             "parentproperty" : "certkeyName"
         }]
     },
+
+
+      {
+            "objecttype" : "sslvserver_sslcertkey_binding",
+            "groupname" : "SSL: Virtual Server Cert Binding",
+            "identifier" : "bind ssl vserver (.*) -certKeyName (.*)",
+            "pattern" : "bind ssl vserver {name} -certKeyName {certKeyName}",
+            "visible": false,
+            "childdiscovery" : [{
+                "type" : "sslcertkey",
+                "childproperty" : "name",
+                "parentproperty" : "certkeyName"
+            }]
+        },
+
 
     {
         "objecttype" : "sslservicegroup",
@@ -275,12 +488,20 @@
         "identifier" : "set ssl serviceGroup (.*)",
         "pattern" : "set ssl serviceGroup {name} {optional}",
         "visible": true,
-        "childdiscovery" : [{
+        "childdiscovery" : [
+          {
             "type" : "sslprofile",
             "childproperty" : "name",
             "parentproperty" : "sslProfile"
-        }]
+        },
+        {
+          "type" : "sslservicegroup_ecccurve_binding",
+          "childproperty" : "servicegroup",
+          "parentproperty" : "name"
+      }
+      ]
     },
+
 
     {
         "objecttype" : "servicegroup",
