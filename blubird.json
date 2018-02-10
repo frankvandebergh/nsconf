@@ -7,8 +7,8 @@
     {
         "objecttype" : "general",
         "groupname" : "General",
-        "identifier" : "#NS(.*)",
-        "pattern" : "#NS{optional}",
+        "identifier" : "#(.*)",
+        "pattern" : "#{optional}",
         "visible" : true,
         "childdiscovery" : [{
         }]
@@ -366,9 +366,12 @@
         "pattern" : "add ssl profile {name} {optional}",
         "visible": true,
         "childdiscovery" : [{
-
+          "type" : "sslprofile_ecccurve_binding",
+          "childproperty" : "name",
+          "parentproperty" : "name"
         }]
     },
+
     {
         "objecttype" : "auditmessageaction",
         "groupname" : "Audit: message action",
@@ -384,6 +387,16 @@
         "groupname" : "SSL: Servicegroup ECCCurve Binding",
         "identifier" : "bind ssl servicegroup (.*) -eccCurveName (.*)",
         "pattern" : "bind ssl servicegroup {servicegroup} -eccCurveName {name}",
+        "visible": false,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "sslprofile_ecccurve_binding",
+        "groupname" : "SSL: SSL Profile ECCCurve Binding",
+        "identifier" : "bind ssl profile (.*) -eccCurveName (.*)",
+        "pattern" : "bind ssl profile {name} -eccCurveName {name}",
         "visible": false,
         "childdiscovery" : [{
 
