@@ -7,8 +7,8 @@
     {
         "objecttype" : "general",
         "groupname" : "General",
-        "identifier" : "#(.*)",
-        "pattern" : "#{optional}",
+        "identifier" : "#NS(.*)",
+        "pattern" : "{optional}",
         "visible" : true,
         "childdiscovery" : [{
         }]
