@@ -483,6 +483,16 @@
         }]
     },
     {
+        "objecttype" : "authenticationcertaction",
+        "groupname" : "Authentication: Cert Action",
+        "identifier" : "add authentication certAction (.*)",
+        "pattern" : "add authentication certAction {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
         "objecttype" : "authenticationnegotiatepolicy",
         "groupname" : "Authentication: Negotiate Policy",
         "identifier" : "add authentication negotiatePolicy (.*)",
@@ -490,6 +500,18 @@
         "visible": true,
         "childdiscovery" : [{
           "type" : "authenticationnegotiateaction",
+          "childproperty" : "name",
+          "parentproperty" : "action"
+        }]
+    },
+    {
+        "objecttype" : "authenticationcertpolicy",
+        "groupname" : "Authentication: Cert Policy",
+        "identifier" : "add authentication certPolicy (.*)",
+        "pattern" : "add authentication certPolicy {name} {expression} {action}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "authenticationcertpolicyaction",
           "childproperty" : "name",
           "parentproperty" : "action"
         }]
@@ -606,6 +628,64 @@
         "visible": true,
         "childdiscovery" : [{
 
+        }]
+    },
+    {
+        "objecttype" : "vpntrafficpolicy",
+        "groupname" : "VPN: Traffic Policy",
+        "identifier" : "add vpn trafficPolicy (.*)",
+        "pattern" : "add vpn trafficPolicy {name} {expression} {action}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "tmtrafficAction",
+          "childproperty" : "name",
+          "parentproperty" : "action"
+        }]
+    },
+    {
+        "objecttype" : "transformprofile",
+        "groupname" : "Transform: Profile",
+        "identifier" : "add transform profile (.*)",
+        "pattern" : "add transform profile {name}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "transformaction",
+          "childproperty" : "profile",
+          "parentproperty" : "name"
+        }]
+    },
+    {
+        "objecttype" : "transformaction",
+        "groupname" : "Transform: Action",
+        "identifier" : "add transform action (.*)",
+        "pattern" : "add transform action {name} {profile} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "transformaction-set",
+          "childproperty" : "name",
+          "parentproperty" : "name"
+          }]
+    },
+    {
+        "objecttype" : "transformaction-set",
+        "groupname" : "Transform: Action Settings",
+        "identifier" : "set transform action (.*)",
+        "pattern" : "set transform action {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "transformpolicy",
+        "groupname" : "Transform: Policy",
+        "identifier" : "add transform policy (.*)",
+        "pattern" : "add transform policy {name} {rule} {profile}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "transformprofile",
+          "childproperty" : "name",
+          "parentproperty" : "profile"
         }]
     },
     {
