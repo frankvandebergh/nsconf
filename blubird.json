@@ -205,6 +205,24 @@
         }
     ]
     },
+    {
+        "objecttype" : "authenticationvserver",
+        "groupname" : "AAA: Virtual Server",
+        "identifier" : "add authentication vserver (.*)",
+        "pattern" : "add authentication vserver {name} {protocol} {IP}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "vpnvserver",
+        "groupname" : "VPN: Virtual Server",
+        "identifier" : "add vpn vserver (.*)",
+        "pattern" : "add vpn vserver {name} {protocol} {IP}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
 
     {
         "objecttype" : "lbmonitor",
@@ -215,12 +233,50 @@
         "childdiscovery" : [{
         }]
     },
+    {
+        "objecttype" : "csvserver_responderpolicy_binding",
+        "groupname" : "CS: Responder Policy Binding",
+        "identifier" : "bind cs vserver (.*) -policyname (.*) -type REQUEST",
+        "pattern" : "bind cs vserver {csvserver} -policyname {name} {optional} -type REQUEST",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "responderpolicy",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+        }
+    },
+    {
+        "objecttype" : "csvserver_rewritepolicy_binding",
+        "groupname" : "CS: Rewrite Policy Binding",
+        "identifier" : "bind cs vserver (.*) -policyname (.*) -type REQUEST",
+        "pattern" : "bind cs vserver {csvserver} -policyname {name} {optional} -type REQUEST",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "rewritepolicy",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+        }
+        ]
+    },
+    {
+        "objecttype" : "csvserver_lbvserver_binding",
+        "groupname" : "CS: Default LB VS Binding",
+        "identifier" : "bind cs vserver (.*) -lbvserver (.*)",
+        "pattern" : "bind cs vserver {name} -lbvserver {lbvserver}",
+        "visible" : true,
+        "childdiscovery" : [
+        {
+            "type" : "lbvserver",
+            "childproperty" : "name",
+            "parentproperty" : "lbvserver"
+        }]
+    },
 
     {
         "objecttype" : "csvserver_cspolicy_binding",
         "groupname" : "CS: Policy Binding",
-        "identifier" : "bind cs vserver (.*) -policyname (.*) -targetLBVServer (.*) -priority (.*)",
-        "pattern" : "bind cs vserver {csvserver} -policyname {name} -targetLBVserver {lbvserver} -priority {priority}",
+        "identifier" : "bind cs vserver (.*) -policyname (.*)",
+        "pattern" : "bind cs vserver {csvserver} -policyname {name} {optional}",
         "visible" : true,
         "childdiscovery" : [{
             "type" : "cspolicy",
@@ -256,14 +312,22 @@
     {
     "objecttype" : "csaction",
     "groupname" : "CS: Action",
-    "identifier" : "add cs action (.*) -targetLBVserver (.*)",
-    "pattern" : "add cs action {name} -targetLBVserver {targetLBVserver}{optional}",
+    "identifier" : "add cs action (.*)",
+    "pattern" : "add cs action {name} {optional}",
     "visible" : true,
     "childdiscovery" : [{
         "type" : "lbvserver",
         "childproperty" : "name",
         "parentproperty" : "targetLBVserver"
-    }]
+    },{
+      "type" : "authenticationvserver",
+      "childproperty" : "name",
+      "parentproperty" : "targetVserver"
+      },{
+        "type" : "authenticationvserver",
+        "childproperty" : "name",
+        "parentproperty" : "targetVserver"
+        }]
   },
 
     {
@@ -369,6 +433,118 @@
           "type" : "sslprofile_ecccurve_binding",
           "childproperty" : "name",
           "parentproperty" : "name"
+        },{
+          "type" : "sslprofile_set",
+          "childproperty" : "name",
+          "parentproperty" : "name"
+          }]
+    },
+    {
+        "objecttype" : "sslprofile_set",
+        "groupname" : "Profiles: SSL Profile settings",
+        "identifier" : "set ssl profile (.*)",
+        "pattern" : "set ssl profile {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "authenticationldapaction",
+        "groupname" : "Authentication: LDAP Action",
+        "identifier" : "add authentication ldapAction (.*)",
+        "pattern" : "add authentication ldapAction {name} -serverIP {server} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "lbvserver",
+          "childproperty" : "IP",
+          "parentproperty" : "server"
+        }]
+    },
+    {
+        "objecttype" : "authenticationldappolicy",
+        "groupname" : "Authentication: LDAP Policy",
+        "identifier" : "add authentication ldapPolicy (.*)",
+        "pattern" : "add authentication ldapPolicy {name} {expression} {action}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "authenticationldapaction",
+          "childproperty" : "name",
+          "parentproperty" : "action"
+        }]
+    },
+    {
+        "objecttype" : "authenticationnegotiateaction",
+        "groupname" : "Authentication: Negotiate Action",
+        "identifier" : "add authentication negotiateAction (.*)",
+        "pattern" : "add authentication negotiateAction {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "authenticationnegotiatepolicy",
+        "groupname" : "Authentication: Negotiate Policy",
+        "identifier" : "add authentication negotiatePolicy (.*)",
+        "pattern" : "add authentication negotiatePolicy {name} {expression} {action}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "authenticationnegotiateaction",
+          "childproperty" : "name",
+          "parentproperty" : "action"
+        }]
+    },
+    {
+        "objecttype" : "tmformsssoaction",
+        "groupname" : "Traffic Management: Forms SSO Action",
+        "identifier" : "add tm formSSOAction (.*)",
+        "pattern" : "add tm formSSOAction {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "tmtrafficaction",
+        "groupname" : "Traffic Management: Traffic Action",
+        "identifier" : "add tm trafficAction (.*)",
+        "pattern" : "add tm trafficAction {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "tmtrafficpolicy",
+        "groupname" : "Traffic Management: Traffic Policy",
+        "identifier" : "add tm trafficPolicy (.*)",
+        "pattern" : "add tm trafficPolicy {name} {expression} {action}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "tmtrafficaction",
+          "childproperty" : "name",
+          "parentproperty" : "action"
+        }]
+    },
+    {
+        "objecttype" : "netprofile",
+        "groupname" : "Network: Net Profile",
+        "identifier" : "add netProfile (.*)",
+        "pattern" : "add net profile {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "nsip",
+          "childproperty" : "name",
+          "parentproperty" : "srcIP"
+        }]
+    },
+    {
+        "objecttype" : "authorizationpolicy",
+        "groupname" : "Authorization: Policy",
+        "identifier" : "add authorization policy (.*)",
+        "pattern" : "add authorization policy {name} {expression} {action}",
+        "visible": true,
+        "childdiscovery" : [{
         }]
     },
 
@@ -413,10 +589,54 @@
         }]
     },
     {
+        "objecttype" : "vpnsessionaction",
+        "groupname" : "VPN: Session Action",
+        "identifier" : "add vpn sessionAction (.*)",
+        "pattern" : "add vpn sessionAction {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "vpnsessionpolicy",
+        "groupname" : "VPN: Session Policy",
+        "identifier" : "add vpn sessionPolicy (.*)",
+        "pattern" : "add vpn sessionPolicy {name} {expression} {action}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "vpnsessionaction",
+          "childproperty" : "name",
+          "parentproperty" : "action"
+        }]
+    },
+    {
         "objecttype" : "auditsyslogaction",
         "groupname" : "Audit: Syslog Action",
         "identifier" : "add audit syslogAction (.*)",
         "pattern" : "add audit syslogAction {name} {server} -logLevel {loglevel} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "sslcipher",
+        "groupname" : "SSL: Cipher Group",
+        "identifier" : "add ssl cipher (.*)",
+        "pattern" : "add ssl cipher {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "sslcipher-item",
+          "childproperty" : "sslcipher",
+          "parentproperty" : "action"
+        }]
+    },
+    {
+        "objecttype" : "sslcipher-item",
+        "groupname" : "SSL: Cipher",
+        "identifier" : "bind ssl cipher (.*)",
+        "pattern" : "bind ssl cipher {sslcipher} -cipherName {name}",
         "visible": true,
         "childdiscovery" : [{
 
@@ -493,6 +713,18 @@
                 "parentproperty" : "certkeyName"
             }]
         },
+        {
+              "objecttype" : "sslvserver_sslcipher_binding",
+              "groupname" : "SSL: Virtual Server Cipher Binding",
+              "identifier" : "bind ssl vserver (.*) -cipherName (.*)",
+              "pattern" : "bind ssl vserver {name} -cipherName {sslcipher}",
+              "visible": false,
+              "childdiscovery" : [{
+                  "type" : "sslcipher",
+                  "childproperty" : "name",
+                  "parentproperty" : "sslcipher"
+              }]
+          },
 
 
     {
