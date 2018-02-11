@@ -431,7 +431,7 @@
         "visible": true,
         "childdiscovery" : [{
           "type" : "sslprofile_ecccurve_binding",
-          "childproperty" : "name",
+          "childproperty" : "sslprofile",
           "parentproperty" : "name"
         },{
           "type" : "sslprofile_set",
@@ -604,7 +604,7 @@
         "objecttype" : "sslprofile_ecccurve_binding",
         "groupname" : "SSL: SSL Profile ECCCurve Binding",
         "identifier" : "bind ssl profile (.*) -eccCurveName (.*)",
-        "pattern" : "bind ssl profile {name} -eccCurveName {name}",
+        "pattern" : "bind ssl profile {sslprofile} -eccCurveName {ecccurvename}",
         "visible": false,
         "childdiscovery" : [{
 
