@@ -243,7 +243,7 @@
             "type" : "responderpolicy",
             "childproperty" : "name",
             "parentproperty" : "name"
-        }
+        }]
     },
     {
         "objecttype" : "csvserver_rewritepolicy_binding",
