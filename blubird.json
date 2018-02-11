@@ -714,7 +714,7 @@
         "objecttype" : "sslcipher",
         "groupname" : "SSL: Cipher Group",
         "identifier" : "add ssl cipher (.*)",
-        "pattern" : "add ssl cipher {name} {optional}",
+        "pattern" : "add ssl cipher {name}{optional}",
         "visible": true,
         "childdiscovery" : [{
           "type" : "sslcipher-item",
