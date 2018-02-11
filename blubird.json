@@ -569,6 +569,16 @@
         }]
     },
     {
+        "objecttype" : "sslservice_ecccurve_binding",
+        "groupname" : "SSL: Service ECCCurve Binding",
+        "identifier" : "bind ssl service (.*) -eccCurveName (.*)",
+        "pattern" : "bind ssl service {service} -eccCurveName {name}",
+        "visible": false,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
         "objecttype" : "sslprofile_ecccurve_binding",
         "groupname" : "SSL: SSL Profile ECCCurve Binding",
         "identifier" : "bind ssl profile (.*) -eccCurveName (.*)",
@@ -746,6 +756,25 @@
       }
       ]
     },
+    {
+        "objecttype" : "sslservice",
+        "groupname" : "SSL: Service",
+        "identifier" : "set ssl service (.*)",
+        "pattern" : "set ssl service {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [
+          {
+            "type" : "sslprofile",
+            "childproperty" : "name",
+            "parentproperty" : "sslProfile"
+        },
+        {
+          "type" : "sslservice_ecccurve_binding",
+          "childproperty" : "service",
+          "parentproperty" : "name"
+      }
+      ]
+    },
 
 
     {
@@ -763,13 +792,34 @@
             "childproperty" : "servicegroupname",
             "parentproperty" : "name"
         },{
-            "type" : "ssslservicegroup",
+            "type" : "sslservicegroup",
             "childproperty" : "name",
             "parentproperty" : "name"
         }
     ]
     },
 
+    {
+        "objecttype" : "service",
+        "groupname" : "LB: Service",
+        "identifier" : "add service (.*)",
+        "pattern" : "add service {name} {server} {servicetype} {port}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "server",
+            "childproperty" : "name",
+            "parentproperty" : "server"
+        },{
+            "type" : "service_lbmonitor_binding",
+            "childproperty" : "servicegroupname",
+            "parentproperty" : "name"
+        },{
+            "type" : "sslservice",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+        }
+    ]
+    },
     {
         "objecttype" : "service_lbmonitor_binding",
         "groupname" : "LB: Service monitor binding",
@@ -875,7 +925,13 @@
             "type" : "rewriteaction",
             "childproperty" : "name",
             "parentproperty" : "action"
-        }]
+        },
+        {
+            "type" : "auditmessageaction",
+            "childproperty" : "name",
+            "parentproperty" : "logAction"
+        }
+      ]
     },
 
     {
