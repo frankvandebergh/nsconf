@@ -41,6 +41,124 @@
         }]
     },
     {
+        "objecttype" : "appfwprofile",
+        "groupname" : "APPFW: Profile",
+        "identifier" : "add appfw profile (.*)",
+        "pattern" : "add appfw profile {name} {optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+          "type" : "appfwprofile_starturl_binding",
+          "childproperty" : "profile",
+          "parentproperty" : "name"
+        },{
+          "type" : "appfwprofile_denyurl_binding",
+          "childproperty" : "profile",
+          "parentproperty" : "name"
+        },
+        {
+          "type" : "appfwprofile_xmlattachmenturl_binding",
+          "childproperty" : "profile",
+          "parentproperty" : "name"
+        },
+        {
+          "type" : "appfwprofile_xmlvalidationurl_binding",
+          "childproperty" : "profile",
+          "parentproperty" : "name"
+        },
+        {
+          "type" : "appfwprofile_xmldosurl_binding",
+          "childproperty" : "profile",
+          "parentproperty" : "name"
+        },
+        {
+          "type" : "appfwprofile_xmlwsiurl_binding",
+          "childproperty" : "profile",
+          "parentproperty" : "name"
+        },
+        {
+          "type" : "appfwprofile_excluderescontenttype_binding",
+          "childproperty" : "profile",
+          "parentproperty" : "name"
+          }
+        ]
+    },
+    {
+        "objecttype" : "appfwpolicy",
+        "groupname" : "APPFW: Policy",
+        "identifier" : "add appfw policy (.*)",
+        "pattern" : "add appfw policy {name} {rule} {profile}",
+        "visible" : true,
+        "childdiscovery" : [{
+            "type" : "appfwprofile",
+            "childproperty" : "name",
+            "parentproperty" : "profile"
+        }]
+    },
+    {
+        "objecttype" : "appfwprofile_starturl_binding",
+        "groupname" : "APPFW: Start URL",
+        "identifier" : "bind appfw profile (.*) -startURL (.*)",
+        "pattern" : "bind appfw profile {profile} -startURL {name}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "appfwprofile_denyurl_binding",
+        "groupname" : "APPFW: Deny URL",
+        "identifier" : "bind appfw profile (.*) -denyURL (.*)",
+        "pattern" : "bind appfw profile {profile} -denyURL {name}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "appfwprofile_xmlvalidationurl_binding",
+        "groupname" : "APPFW: XML Attachment URL",
+        "identifier" : "bind appfw profile (.*) -XMLValidationURL (.*)",
+        "pattern" : "bind appfw profile {profile} -XMLValidationURL {name}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "appfwprofile_xmlattachmenturl_binding",
+        "groupname" : "APPFW: XML Attachment URL",
+        "identifier" : "bind appfw profile (.*) -XMLAttachmentURL (.*)",
+        "pattern" : "bind appfw profile {profile} -XMLAttachmentURL {name}{optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "appfwprofile_xmldosurl_binding",
+        "groupname" : "APPFW: XML DoS URL",
+        "identifier" : "bind appfw profile (.*) -XMLDoSURL (.*)",
+        "pattern" : "bind appfw profile {profile} -XMLDoSURL {name}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "appfwprofile_excluderescontenttype_binding",
+        "groupname" : "APPFW: Exclude Response ContentType",
+        "identifier" : "bind appfw profile (.*) -excludeResContentType (.*)",
+        "pattern" : "bind appfw profile {profile} {optional} -excludeResContentType {name}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+
+    {
+        "objecttype" : "appfwprofile_xmlwsiurl_binding",
+        "groupname" : "APPFW: XML DoS URL",
+        "identifier" : "bind appfw profile (.*) -XMLWSIURL (.*)",
+        "pattern" : "bind appfw profile {profile} -XMLWSIURL {name}",
+        "visible" : true,
+        "childdiscovery" : [{
+        }]
+    },
+    {
         "objecttype" : "vlan",
         "groupname" : "Network: VLAN",
         "identifier" : "add vlan (.*)",
@@ -953,7 +1071,11 @@
             "type" : "rewritepolicy",
             "childproperty" : "name",
             "parentproperty" : "policy"
-        }]
+        },{
+          "type" : "appfwpolicy",
+          "childproperty" : "name",
+          "parentproperty" : "policy"
+          }]
     },
 
     {
