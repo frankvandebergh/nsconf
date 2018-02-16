@@ -1078,6 +1078,27 @@
           }]
     },
 
+{
+    "objecttype" : "lbvserver_appfwpolicy_binding",
+    "groupname" : "LB: Virtual Server AppFW Policy binding",
+    "identifier" : "bind lb vserver (.*) -policyName (.*) -priority (.*)",
+    "pattern" : "bind lb vserver {lbvserver} -policyName {policy} -priority {priority}",
+    "visible" : false,
+    "childdiscovery" : [{
+        "type" : "responderpolicy",
+        "childproperty" : "name",
+        "parentproperty" : "policy"
+    },{
+        "type" : "rewritepolicy",
+        "childproperty" : "name",
+        "parentproperty" : "policy"
+    },{
+      "type" : "appfwpolicy",
+      "childproperty" : "name",
+      "parentproperty" : "policy"
+      }]
+},
+
     {
         "objecttype" : "lbvserver_servicegroup_binding",
         "groupname" : "LB: Virtual Server svg binding",
