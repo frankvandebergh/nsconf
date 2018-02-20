@@ -134,7 +134,7 @@
         "objecttype" : "appfwprofile_xmldosurl_binding",
         "groupname" : "APPFW: XML DoS URL",
         "identifier" : "bind appfw profile (.*) -XMLDoSURL (.*)",
-        "pattern" : "bind appfw profile {profile} -XMLDoSURL {name}",
+        "pattern" : "bind appfw profile {profile} -XMLDoSURL {name}{optional}",
         "visible" : true,
         "childdiscovery" : [{
         }]
@@ -143,7 +143,7 @@
         "objecttype" : "appfwprofile_excluderescontenttype_binding",
         "groupname" : "APPFW: Exclude Response ContentType",
         "identifier" : "bind appfw profile (.*) -excludeResContentType (.*)",
-        "pattern" : "bind appfw profile {profile} {optional} -excludeResContentType {name}",
+        "pattern" : "bind appfw profile {profile} {optional}-excludeResContentType {name}",
         "visible" : true,
         "childdiscovery" : [{
         }]
@@ -153,7 +153,7 @@
         "objecttype" : "appfwprofile_xmlwsiurl_binding",
         "groupname" : "APPFW: XML DoS URL",
         "identifier" : "bind appfw profile (.*) -XMLWSIURL (.*)",
-        "pattern" : "bind appfw profile {profile} -XMLWSIURL {name}",
+        "pattern" : "bind appfw profile {profile} -XMLWSIURL {name}{optional}",
         "visible" : true,
         "childdiscovery" : [{
         }]
@@ -289,10 +289,17 @@
             "parentproperty" : "tcpProfileName"
         },
         {
+            "type" : "nshttpprofile",
+            "childproperty" : "name",
+            "parentproperty" : "httpProfileName"
+        },
+        {
             "type" : "lbvserver",
             "childproperty" : "name",
             "parentproperty" : "backupVServer"
         }
+
+
     ]
   },
     {
@@ -320,6 +327,11 @@
             "type" : "nstcpprofile",
             "childproperty" : "name",
             "parentproperty" : "tcpProfileName"
+        },
+        {
+            "type" : "nshttpprofile",
+            "childproperty" : "name",
+            "parentproperty" : "httpProfileName"
         }
     ]
     },
@@ -517,7 +529,18 @@
 
         }]
     },
-
+    {
+        "objecttype" : "nshttpprofile",
+        "groupname" : "Profiles: HTTP Profile",
+        "identifier" : "add ns httpProfile (.*)",
+        "pattern" : "add ns httpProfile {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "nshttpprofile_set",
+          "childproperty" : "name",
+          "parentproperty" : "name"
+        }]
+    },
     {
         "objecttype" : "nstcpprofile",
         "groupname" : "Profiles: TCP Profile",
@@ -535,6 +558,16 @@
         "groupname" : "Profiles: TCP Profile Settings",
         "identifier" : "set ns tcpProfile (.*)",
         "pattern" : "set ns tcpProfile {name} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "nshttpprofile_set",
+        "groupname" : "Profiles: HTTP Profile Settings",
+        "identifier" : "set ns httpProfile (.*)",
+        "pattern" : "set ns httpProfile {name} {optional}",
         "visible": true,
         "childdiscovery" : [{
 
@@ -570,7 +603,7 @@
         "objecttype" : "authenticationldapaction",
         "groupname" : "Authentication: LDAP Action",
         "identifier" : "add authentication ldapAction (.*)",
-        "pattern" : "add authentication ldapAction {name} -serverIP {server} {optional}",
+        "pattern" : "add authentication ldapAction {name} -server{ipname} {server} {optional}",
         "visible": true,
         "childdiscovery" : [{
           "type" : "lbvserver",
@@ -692,7 +725,7 @@
         "objecttype" : "auditmessageaction",
         "groupname" : "Audit: message action",
         "identifier" : "add audit messageaction (.*)",
-        "pattern" : "add audit messageaction {name} {level} {action} -bypassSafetyCheck {bypassSafetyCheck}",
+        "pattern" : "add audit messageaction {name} {level} {action}{optional}",
         "visible": true,
         "childdiscovery" : [{
 
@@ -1057,32 +1090,13 @@
         }]
     },
 
-    {
-        "objecttype" : "lbvserver_binding",
-        "groupname" : "LB: Virtual Server policy binding",
-        "identifier" : "bind lb vserver (.*) -policyName (.*) -priority (.*) -gotoPriorityExpression (.*) -type REQUEST",
-        "pattern" : "bind lb vserver {lbvserver} -policyName {policy} -priority {priority} -gotoPriorityExpression {goto} -type REQUEST",
-        "visible" : true,
-        "childdiscovery" : [{
-            "type" : "responderpolicy",
-            "childproperty" : "name",
-            "parentproperty" : "policy"
-        },{
-            "type" : "rewritepolicy",
-            "childproperty" : "name",
-            "parentproperty" : "policy"
-        },{
-          "type" : "appfwpolicy",
-          "childproperty" : "name",
-          "parentproperty" : "policy"
-          }]
-    },
+
 
 {
-    "objecttype" : "lbvserver_appfwpolicy_binding",
-    "groupname" : "LB: Virtual Server AppFW Policy binding",
-    "identifier" : "bind lb vserver (.*) -policyName (.*) -priority (.*)",
-    "pattern" : "bind lb vserver {lbvserver} -policyName {policy} -priority {priority}",
+    "objecttype" : "lbvserver_binding",
+    "groupname" : "LB: Virtual Server Policy binding",
+    "identifier" : "bind lb vserver (.*) -policyName (.*)",
+    "pattern" : "bind lb vserver {lbvserver} -policyName {policy}{optional}",
     "visible" : false,
     "childdiscovery" : [{
         "type" : "responderpolicy",
