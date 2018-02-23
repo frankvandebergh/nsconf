@@ -428,7 +428,7 @@
         {
             "type" : "lbvserver",
             "childproperty" : "name",
-            "parentproperty" : "targetlbvserver"
+            "parentproperty" : "targetLBVserver"
         }
       ]
     },
