@@ -10,6 +10,7 @@
         "identifier" : "#NS(.*)",
         "pattern" : "{optional}",
         "visible" : true,
+        "key" : "optional",
         "childdiscovery" : [{
         }]
     },
@@ -19,6 +20,7 @@
         "identifier" : "enable ns mode (.*)",
         "pattern" : "enable ns mode {name}",
         "visible" : true,
+                "key" : "name",
         "childdiscovery" : [{
         }]
     },
@@ -28,6 +30,7 @@
         "identifier" : "set interface (.*)",
         "pattern" : "set interface {name} {optional}",
         "visible" : true,
+        "key" : "name",
         "childdiscovery" : [{
         }]
     },
@@ -37,6 +40,7 @@
         "identifier" : "set channel (.*)",
         "pattern" : "set channel {name} {optional}",
         "visible" : true,
+        "key" : "name",
         "childdiscovery" : [{
         }]
     },
@@ -46,6 +50,7 @@
         "identifier" : "add appfw profile (.*)",
         "pattern" : "add appfw profile {name} {optional}",
         "visible" : true,
+        "key" : "name",
         "childdiscovery" : [{
           "type" : "appfwprofile_starturl_binding",
           "childproperty" : "profile",
@@ -88,6 +93,7 @@
         "identifier" : "add appfw policy (.*)",
         "pattern" : "add appfw policy {name} {rule} {profile}",
         "visible" : true,
+        "key" : "name",
         "childdiscovery" : [{
             "type" : "appfwprofile",
             "childproperty" : "name",
@@ -100,6 +106,7 @@
         "identifier" : "bind appfw profile (.*) -startURL (.*)",
         "pattern" : "bind appfw profile {profile} -startURL {name}{optional}",
         "visible" : true,
+        "key" : "name",
         "childdiscovery" : [{
         }]
     },
@@ -417,7 +424,13 @@
             "type" : "lbvserver",
             "childproperty" : "name",
             "parentproperty" : "lbvserver"
-        }]
+        },
+        {
+            "type" : "lbvserver",
+            "childproperty" : "name",
+            "parentproperty" : "targetlbvserver"
+        }
+      ]
     },
 
     {
