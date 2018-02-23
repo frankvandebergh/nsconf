@@ -612,6 +612,18 @@
         }]
     },
     {
+        "objecttype" : "authenticationtacacsaction",
+        "groupname" : "Authentication: TACACS Action",
+        "identifier" : "add authentication tacacsAction (.*)",
+        "pattern" : "add authentication tacacsAction {name} -server{ipname} {server} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "lbvserver",
+          "childproperty" : "IP",
+          "parentproperty" : "server"
+        }]
+    },
+    {
         "objecttype" : "authenticationldappolicy",
         "groupname" : "Authentication: LDAP Policy",
         "identifier" : "add authentication ldapPolicy (.*)",
@@ -644,6 +656,99 @@
         }]
     },
     {
+        "objecttype" : "dnsaddrec",
+        "groupname" : "DNS: A record",
+        "identifier" : "add dns addRec (.*)",
+        "pattern" : "add dns addRec {name} {ip}{optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "dnsnsrec",
+        "groupname" : "DNS: NS record",
+        "identifier" : "add dns nsRec (.*)",
+        "pattern" : "add dns nsRec {name} {server}{optional}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "dnssuffix",
+        "groupname" : "DNS: Suffix",
+        "identifier" : "add dns suffix (.*)",
+        "pattern" : "add dns suffix {name}",
+        "visible": true,
+        "childdiscovery" : [{
+
+        }]
+    },
+    {
+        "objecttype" : "authenticationpolicy",
+        "groupname" : "Authentication: Policy",
+        "identifier" : "add authentication Policy (.*)",
+        "pattern" : "add authentication Policy {name} -rule {rule} -action {action}{optional}",
+        "visible": true,
+        "childdiscovery" : [
+          {
+            "type" : "authenticationnegotiateaction",
+            "childproperty" : "name",
+            "parentproperty" : "action"
+          },
+          {
+            "type" : "authenticationcertpolicyaction",
+            "childproperty" : "name",
+            "parentproperty" : "action"
+          },
+          {
+            "type" : "authenticationtacacsaction",
+            "childproperty" : "name",
+            "parentproperty" : "action"
+          },
+          {
+            "type" : "authenticationldapaction",
+            "childproperty" : "name",
+            "parentproperty" : "action"
+          }
+      ]
+    },
+    {
+        "objecttype" : "systemglobal_binding",
+        "groupname" : "System: Global Binding",
+        "identifier" : "bind system global (.*)",
+        "pattern" : "bind system global {name}{optional}",
+        "visible": true,
+        "childdiscovery" : [
+          {
+            "type" : "auditsyslogpolicy",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+          },
+          {
+            "type" : "responderpolicy",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+          },
+          {
+            "type" : "rewritepolicy",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+          },{
+            "type" : "authenticationldappolicy",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+          },
+          {
+            "type" : "authenticationpolicy",
+            "childproperty" : "name",
+            "parentproperty" : "name"
+          }
+      ]
+    },
+
+    {
         "objecttype" : "authenticationnegotiatepolicy",
         "groupname" : "Authentication: Negotiate Policy",
         "identifier" : "add authentication negotiatePolicy (.*)",
@@ -661,11 +766,13 @@
         "identifier" : "add authentication certPolicy (.*)",
         "pattern" : "add authentication certPolicy {name} {expression} {action}",
         "visible": true,
-        "childdiscovery" : [{
+        "childdiscovery" : [
+          {
           "type" : "authenticationcertpolicyaction",
           "childproperty" : "name",
           "parentproperty" : "action"
-        }]
+        }
+      ]
     },
     {
         "objecttype" : "tmformsssoaction",
