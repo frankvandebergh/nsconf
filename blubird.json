@@ -358,8 +358,85 @@
         "pattern" : "add vpn vserver {name} {protocol} {IP}{optional}",
         "visible" : true,
         "childdiscovery" : [{
-        }]
+
+              "type" : "nsip",
+              "childproperty" : "name",
+              "parentproperty" : "IP"
+          },
+          {
+              "type" : "sslvserver",
+              "childproperty" : "name",
+              "parentproperty" : "name"
+          },
+          {
+              "type" : "nstcpprofile",
+              "childproperty" : "name",
+              "parentproperty" : "tcpProfileName"
+          },
+          {
+              "type" : "nshttpprofile",
+              "childproperty" : "name",
+              "parentproperty" : "httpProfileName"
+          },
+          {
+              "type" : "vpnvserver_binding",
+              "childproperty" : "name",
+              "parentproperty" : "name"
+          }
+        ]
     },
+    {
+        "objecttype" : "vpnvserver_binding",
+        "groupname" : "VPN: Policy Binding",
+        "identifier" : "bind vpn vserver (.*)",
+        "pattern" : "bind vpn vserver {name} -policy {policy}{optional}",
+        "visible" : false,
+        "childdiscovery" : [{
+
+              "type" : "authenticationldappolicy",
+              "childproperty" : "name",
+              "parentproperty" : "policy"
+          },
+          {
+              "type" : "authenticationpolicy",
+              "childproperty" : "name",
+              "parentproperty" : "policy"
+          },
+          {
+              "type" : "authenticationcertpolicy",
+              "childproperty" : "name",
+              "parentproperty" : "policy"
+          },
+          {
+              "type" : "vpnsessionpolicy",
+              "childproperty" : "name",
+              "parentproperty" : "policy"
+          }
+        ]
+    },
+
+        {
+            "objecttype" : "vpnsessionaction",
+            "groupname" : "VPN: Session Action",
+            "identifier" : "add vpn sessionaction (.*)",
+            "pattern" : "add vpn sessionaction {name} {optional}",
+            "visible" : true,
+            "childdiscovery" : [{
+            }]
+        },
+
+            {
+                "objecttype" : "vpnsessionpolicy",
+                "groupname" : "VPN: Session Policy",
+                "identifier" : "add vpn sessionpolicy (.*)",
+                "pattern" : "add vpn sessionpolicy {name} {rule} {action}",
+                "visible" : true,
+                "childdiscovery" : [{
+                  "type" : "vpnsessionaction",
+                  "childproperty" : "name",
+                  "parentproperty" : "action"
+                }]
+            },
 
     {
         "objecttype" : "lbmonitor",
@@ -415,7 +492,8 @@
         "identifier" : "bind cs vserver (.*) -policyname (.*)",
         "pattern" : "bind cs vserver {csvserver} -policyname {name} {optional}",
         "visible" : true,
-        "childdiscovery" : [{
+        "childdiscovery" : [
+          {
             "type" : "cspolicy",
             "childproperty" : "name",
             "parentproperty" : "name"
