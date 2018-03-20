@@ -304,6 +304,11 @@
             "type" : "lbvserver",
             "childproperty" : "name",
             "parentproperty" : "backupVServer"
+        },
+        {
+            "type" : "netprofile",
+            "childproperty" : "name",
+            "parentproperty" : "netProfile"
         }
 
 
@@ -339,6 +344,11 @@
             "type" : "nshttpprofile",
             "childproperty" : "name",
             "parentproperty" : "httpProfileName"
+        },
+        {
+            "type" : "netprofile",
+            "childproperty" : "name",
+            "parentproperty" : "netProfile"
         }
     ]
     },
@@ -382,6 +392,11 @@
               "type" : "vpnvserver_binding",
               "childproperty" : "name",
               "parentproperty" : "name"
+          },
+          {
+              "type" : "netprofile",
+              "childproperty" : "name",
+              "parentproperty" : "netProfile"
           }
         ]
     },
@@ -397,6 +412,12 @@
               "childproperty" : "name",
               "parentproperty" : "policy"
           },
+          {
+
+                "type" : "authenticationradiuspolicy",
+                "childproperty" : "name",
+                "parentproperty" : "policy"
+            },
           {
               "type" : "authenticationpolicy",
               "childproperty" : "name",
@@ -701,6 +722,19 @@
           "childproperty" : "IP",
           "parentproperty" : "server"
         }]
+
+    },
+    {
+        "objecttype" : "authenticationradiusaction",
+        "groupname" : "Authentication: RADIUS Action",
+        "identifier" : "add authentication radiusAction (.*)",
+        "pattern" : "add authentication radiusAction {name} -server{ipname} {server} {optional}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "lbvserver",
+          "childproperty" : "IP",
+          "parentproperty" : "server"
+        }]
     },
     {
         "objecttype" : "authenticationtacacsaction",
@@ -722,6 +756,18 @@
         "visible": true,
         "childdiscovery" : [{
           "type" : "authenticationldapaction",
+          "childproperty" : "name",
+          "parentproperty" : "action"
+        }]
+    },
+    {
+        "objecttype" : "authenticationradiuspolicy",
+        "groupname" : "Authentication: RADIUS Policy",
+        "identifier" : "add authentication radiusPolicy (.*)",
+        "pattern" : "add authentication radiusPolicy {name} {expression} {action}",
+        "visible": true,
+        "childdiscovery" : [{
+          "type" : "authenticationradiusaction",
           "childproperty" : "name",
           "parentproperty" : "action"
         }]
@@ -800,6 +846,11 @@
           },
           {
             "type" : "authenticationldapaction",
+            "childproperty" : "name",
+            "parentproperty" : "action"
+          },
+          {
+            "type" : "authenticationradiusaction",
             "childproperty" : "name",
             "parentproperty" : "action"
           }
@@ -901,7 +952,7 @@
         "objecttype" : "netprofile",
         "groupname" : "Network: Net Profile",
         "identifier" : "add netProfile (.*)",
-        "pattern" : "add net profile {name} {optional}",
+        "pattern" : "add netProfile {name} {optional}",
         "visible": true,
         "childdiscovery" : [{
           "type" : "nsip",
@@ -1224,6 +1275,11 @@
             "type" : "sslservicegroup",
             "childproperty" : "name",
             "parentproperty" : "name"
+        },
+        {
+            "type" : "netprofile",
+            "childproperty" : "name",
+            "parentproperty" : "netProfile"
         }
     ]
     },
