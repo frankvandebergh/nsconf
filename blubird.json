@@ -98,7 +98,26 @@
             "type" : "appfwprofile",
             "childproperty" : "name",
             "parentproperty" : "profile"
-        }]
+        },
+        {
+          "type" : "policystringmap",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
+        },
+        {
+          "type" : "policypatset",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
+        },
+        {
+          "type" : "policyexpression",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
+        }
+      ]
     },
     {
         "objecttype" : "appfwprofile_starturl_binding",
@@ -549,7 +568,13 @@
             "parentproperty" : "action"
         },
         {
-          "type" : "stringmap",
+          "type" : "policystringmap",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
+        },
+        {
+          "type" : "policypatset",
           "childproperty" : "name",
           "parentproperty" : "rule",
           "textsearch" : "true"
@@ -1407,7 +1432,26 @@
             "type" : "responderaction",
             "childproperty" : "name",
             "parentproperty" : "action"
-        }]
+        },
+        {
+          "type" : "policystringmap",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
+        },
+        {
+          "type" : "policypatset",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
+        },
+        {
+          "type" : "policyexpression",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
+        }
+      ]
     },
 
     {
@@ -1434,6 +1478,24 @@
             "type" : "auditmessageaction",
             "childproperty" : "name",
             "parentproperty" : "logAction"
+        },
+        {
+          "type" : "policystringmap",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
+        },
+        {
+          "type" : "policypatset",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
+        },
+        {
+          "type" : "policyexpression",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
         }
       ]
     },
