@@ -547,7 +547,20 @@
             "type" : "csaction",
             "childproperty" : "name",
             "parentproperty" : "action"
+        },
+        {
+          "type" : "stringmap",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
+        },
+        {
+          "type" : "policyexpression",
+          "childproperty" : "name",
+          "parentproperty" : "rule",
+          "textsearch" : "true"
         }
+
       ]
 
     },
