@@ -676,8 +676,18 @@
         "pattern" : "add policy expression {name} {expression}",
         "visible": true,
         "childdiscovery" : [{
-
-        }]
+            "type" : "policystringmap",
+            "childproperty" : "name",
+            "parentproperty" : "expression",
+            "textsearch" : "true"
+          },
+          {
+            "type" : "policypatset",
+            "childproperty" : "name",
+            "parentproperty" : "expression",
+            "textsearch" : "true"
+          }
+        ]
     },
     {
         "objecttype" : "nshttpprofile",
