@@ -2,7 +2,7 @@
 "settings" : {
   "name" : "Blubird default",
   "version" : "1.0",
-  "lastupdate" : "25/04/2018 20:48"
+  "lastupdate" : "25/04/2018 21:11"
 },
 "parseconfig" : [
     {
@@ -538,7 +538,7 @@
         {
           "type" : "rewritepolicylabel_binding",
           "childproperty" : "name",
-          "parentproperty" : "invoke",
+          "parentproperty" : "optional",
           "textsearch" : "true"
         }
       ]
