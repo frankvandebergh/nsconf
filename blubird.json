@@ -346,6 +346,11 @@
             "parentproperty" : "name"
         },
         {
+            "type" : "csvserver_policy_binding",
+            "childproperty" : "csvserver",
+            "parentproperty" : "name"
+        },
+        {
             "type" : "nsip",
             "childproperty" : "name",
             "parentproperty" : "IP"
