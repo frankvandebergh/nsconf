@@ -521,7 +521,7 @@
     {
         "objecttype" : "csvserver_policy_binding",
         "groupname" : "CS: Policy Binding",
-        "identifier" : "bind cs vserver (.*) -policyname (.*) -type REQUEST(.*)",
+        "identifier" : "bind cs vserver (.*) -policyname (.*) -gotoPriorityExpression (.*)",
         "pattern" : "bind cs vserver {csvserver} -policyname {name} {optional}",
         "visible" : true,
         "childdiscovery" : [{
