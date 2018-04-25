@@ -520,7 +520,7 @@
     },
     {
         "objecttype" : "csvserver_policy_binding",
-        "groupname" : "CS: Policy Binding",
+        "groupname" : "CS: Request/Response Policy Binding",
         "identifier" : "bind cs vserver (.*) -policyname (.*) -gotoPriorityExpression (.*)",
         "pattern" : "bind cs vserver {csvserver} -policyname {name} {optional}",
         "visible" : true,
