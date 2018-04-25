@@ -381,6 +381,31 @@
         }]
     },
     {
+        "objecttype" : "authenticationauthnprofile",
+        "groupname" : "AAA: Authentication Profile",
+        "identifier" : "add authentication authnprofile (.*)",
+        "pattern" : "add authentication authnprofile {name} -authnVsName {vserver} {optional}",
+        "visible" : true,
+        "childdiscovery" : [{
+
+
+                "type" : "authenticationvserver",
+                "childproperty" : "name",
+                "parentproperty" : "vserver"
+
+        }]
+    },
+    {
+      "objecttype" : "vpnportaltheme",
+      "groupname" : "VPN: Portal Theme",
+      "identifier" : "add vpn portaltheme (.*)",
+      "pattern" : "add vpn portaltheme {name} -basetheme {basetheme}",
+      "visible" : true,
+      "childdiscovery" : [
+      ]
+    },
+
+    {
         "objecttype" : "vpnvserver",
         "groupname" : "VPN: Virtual Server",
         "identifier" : "add vpn vserver (.*)",
@@ -416,6 +441,12 @@
               "type" : "netprofile",
               "childproperty" : "name",
               "parentproperty" : "netProfile"
+          }
+          ,
+          {
+              "type" : "authenticationauthnprofile",
+              "childproperty" : "name",
+              "parentproperty" : "authnProfile"
           }
         ]
     },
@@ -488,29 +519,27 @@
         }]
     },
     {
-        "objecttype" : "csvserver_responderpolicy_binding",
-        "groupname" : "CS: Responder Policy Binding",
-        "identifier" : "bind cs vserver (.*) -policyname (.*) -type REQUEST",
-        "pattern" : "bind cs vserver {csvserver} -policyname {name} {optional} -type REQUEST",
+        "objecttype" : "csvserver_policy_binding",
+        "groupname" : "CS: Policy Binding",
+        "identifier" : "bind cs vserver (.*) -policyname (.*) -type REQUEST(.*)",
+        "pattern" : "bind cs vserver {csvserver} -policyname {name} {optional}",
         "visible" : true,
         "childdiscovery" : [{
             "type" : "responderpolicy",
             "childproperty" : "name",
             "parentproperty" : "name"
-        }]
-    },
-    {
-        "objecttype" : "csvserver_rewritepolicy_binding",
-        "groupname" : "CS: Rewrite Policy Binding",
-        "identifier" : "bind cs vserver (.*) -policyname (.*) -type REQUEST",
-        "pattern" : "bind cs vserver {csvserver} -policyname {name} {optional} -type REQUEST",
-        "visible" : true,
-        "childdiscovery" : [{
+        },
+        {
             "type" : "rewritepolicy",
             "childproperty" : "name",
             "parentproperty" : "name"
+        },
+        {
+          "type" : "rewritepolicylabel_binding",
+          "childproperty" : "name",
+          "parentproperty" : "invoke policylabel"
         }
-        ]
+      ]
     },
     {
         "objecttype" : "csvserver_lbvserver_binding",
@@ -1508,6 +1537,30 @@
           "textsearch" : "true"
         }
       ]
+    },
+    {
+        "objecttype" : "rewritepolicylabel",
+        "groupname" : "AppExpert: Rewrite Policylabel",
+        "identifier" : "add rewrite policylabel (.*)",
+        "pattern" : "add rewrite policylabel {name} {type}",
+        "visible" : true,
+        "childdiscovery" : [{
+          "type" : "rewritepolicylabel_binding",
+          "childproperty" : "name",
+          "parentproperty" : "name"
+          }]
+    },
+    {
+        "objecttype" : "rewritepolicylabel_binding",
+        "groupname" : "AppExpert: Rewrite Policylabel binding",
+        "identifier" : "bind rewrite policylabel (.*)",
+        "pattern" : "bind rewrite policylabel {name} {policy} {priority} {goto}",
+        "visible" : false,
+        "childdiscovery" : [{
+          "type" : "rewritepolicy",
+          "childproperty" : "name",
+          "parentproperty" : "policy"
+          }]
     },
 
     {
