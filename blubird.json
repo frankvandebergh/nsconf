@@ -1557,7 +1557,7 @@
         "groupname" : "AppExpert: Rewrite Policylabel binding",
         "identifier" : "bind rewrite policylabel (.*)",
         "pattern" : "bind rewrite policylabel {name} {policy} {priority} {goto}",
-        "visible" : false,
+        "visible" : true,
         "childdiscovery" : [{
           "type" : "rewritepolicy",
           "childproperty" : "name",
