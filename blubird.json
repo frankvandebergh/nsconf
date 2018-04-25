@@ -538,7 +538,7 @@
           "type" : "rewritepolicylabel_binding",
           "childproperty" : "name",
           "parentproperty" : "invoke",
-          "textsearch" : true
+          "textsearch" : "true"
         }
       ]
     },
