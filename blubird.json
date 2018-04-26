@@ -2,7 +2,7 @@
 "settings" : {
   "name" : "Blubird default",
   "version" : "1.0",
-  "lastupdate" : "26/04/2018 12:06"
+  "lastupdate" : "26/04/2018 12:12"
 },
 "parseconfig" : [
     {
@@ -675,12 +675,6 @@
             "type" : "policystringmap_pattern_binding",
             "childproperty" : "name",
             "parentproperty" : "name"
-        },
-        {
-            "type" : "lbvserver",
-            "childproperty" : "name",
-            "parentproperty" : "optional",
-            "textsearch" : "true"
         }]
     },
 
@@ -705,7 +699,12 @@
         "visible": true,
         "childdiscovery" : [{
 
-        }]
+              "type" : "lbvserver",
+              "childproperty" : "name",
+              "parentproperty" : "value",
+              "textsearch" : "true"
+          }
+        ]
     },
 
     {
