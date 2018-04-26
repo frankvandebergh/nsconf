@@ -2,7 +2,7 @@
 "settings" : {
   "name" : "Blubird default",
   "version" : "1.0",
-  "lastupdate" : "25/04/2018 21:23"
+  "lastupdate" : "26/04/2018 12:06"
 },
 "parseconfig" : [
     {
@@ -14,79 +14,6 @@
         "key" : "optional",
         "childdiscovery" : [{
         }]
-    },
-    {
-        "objecttype" : "nsmode",
-        "groupname" : "Modes",
-        "identifier" : "enable ns mode (.*)",
-        "pattern" : "enable ns mode {name}",
-        "visible" : true,
-                "key" : "name",
-        "childdiscovery" : [{
-        }]
-    },
-    {
-        "objecttype" : "interface",
-        "groupname" : "Network: Interface",
-        "identifier" : "set interface (.*)",
-        "pattern" : "set interface {name} {optional}",
-        "visible" : true,
-        "key" : "name",
-        "childdiscovery" : [{
-        }]
-    },
-    {
-        "objecttype" : "channel",
-        "groupname" : "Network: Channel",
-        "identifier" : "set channel (.*)",
-        "pattern" : "set channel {name} {optional}",
-        "visible" : true,
-        "key" : "name",
-        "childdiscovery" : [{
-        }]
-    },
-    {
-        "objecttype" : "appfwprofile",
-        "groupname" : "APPFW: Profile",
-        "identifier" : "add appfw profile (.*)",
-        "pattern" : "add appfw profile {name} {optional}",
-        "visible" : true,
-        "key" : "name",
-        "childdiscovery" : [{
-          "type" : "appfwprofile_starturl_binding",
-          "childproperty" : "profile",
-          "parentproperty" : "name"
-        },{
-          "type" : "appfwprofile_denyurl_binding",
-          "childproperty" : "profile",
-          "parentproperty" : "name"
-        },
-        {
-          "type" : "appfwprofile_xmlattachmenturl_binding",
-          "childproperty" : "profile",
-          "parentproperty" : "name"
-        },
-        {
-          "type" : "appfwprofile_xmlvalidationurl_binding",
-          "childproperty" : "profile",
-          "parentproperty" : "name"
-        },
-        {
-          "type" : "appfwprofile_xmldosurl_binding",
-          "childproperty" : "profile",
-          "parentproperty" : "name"
-        },
-        {
-          "type" : "appfwprofile_xmlwsiurl_binding",
-          "childproperty" : "profile",
-          "parentproperty" : "name"
-        },
-        {
-          "type" : "appfwprofile_excluderescontenttype_binding",
-          "childproperty" : "profile",
-          "parentproperty" : "name"
-          }
-        ]
     },
     {
         "objecttype" : "appfwpolicy",
@@ -120,71 +47,255 @@
         }
       ]
     },
+
+        {
+            "objecttype" : "appfwprofile",
+            "groupname" : "APPFW: Profile",
+            "identifier" : "add appfw profile (.*)",
+            "pattern" : "add appfw profile {name} {optional}",
+            "visible" : true,
+            "key" : "name",
+            "childdiscovery" : [{
+              "type" : "appfwprofile_starturl_binding",
+              "childproperty" : "profile",
+              "parentproperty" : "name"
+            },{
+              "type" : "appfwprofile_denyurl_binding",
+              "childproperty" : "profile",
+              "parentproperty" : "name"
+            },
+            {
+              "type" : "appfwprofile_xmlattachmenturl_binding",
+              "childproperty" : "profile",
+              "parentproperty" : "name"
+            },
+            {
+              "type" : "appfwprofile_xmlvalidationurl_binding",
+              "childproperty" : "profile",
+              "parentproperty" : "name"
+            },
+            {
+              "type" : "appfwprofile_xmldosurl_binding",
+              "childproperty" : "profile",
+              "parentproperty" : "name"
+            },
+            {
+              "type" : "appfwprofile_xmlwsiurl_binding",
+              "childproperty" : "profile",
+              "parentproperty" : "name"
+            },
+            {
+              "type" : "appfwprofile_excluderescontenttype_binding",
+              "childproperty" : "profile",
+              "parentproperty" : "name"
+              }
+            ]
+        },
+        {
+            "objecttype" : "appfwprofile_starturl_binding",
+            "groupname" : "APPFW: Start URL",
+            "identifier" : "bind appfw profile (.*) -startURL (.*)",
+            "pattern" : "bind appfw profile {profile} -startURL {name}{optional}",
+            "visible" : true,
+            "key" : "name",
+            "childdiscovery" : [{
+            }]
+        },
+        {
+            "objecttype" : "appfwprofile_denyurl_binding",
+            "groupname" : "APPFW: Deny URL",
+            "identifier" : "bind appfw profile (.*) -denyURL (.*)",
+            "pattern" : "bind appfw profile {profile} -denyURL {name}{optional}",
+            "visible" : true,
+            "childdiscovery" : [{
+            }]
+        },
+        {
+            "objecttype" : "appfwprofile_xmlvalidationurl_binding",
+            "groupname" : "APPFW: XML Attachment URL",
+            "identifier" : "bind appfw profile (.*) -XMLValidationURL (.*)",
+            "pattern" : "bind appfw profile {profile} -XMLValidationURL {name}{optional}",
+            "visible" : true,
+            "childdiscovery" : [{
+            }]
+        },
+        {
+            "objecttype" : "appfwprofile_xmlattachmenturl_binding",
+            "groupname" : "APPFW: XML Attachment URL",
+            "identifier" : "bind appfw profile (.*) -XMLAttachmentURL (.*)",
+            "pattern" : "bind appfw profile {profile} -XMLAttachmentURL {name}{optional}",
+            "visible" : true,
+            "childdiscovery" : [{
+            }]
+        },
+        {
+            "objecttype" : "appfwprofile_xmldosurl_binding",
+            "groupname" : "APPFW: XML DoS URL",
+            "identifier" : "bind appfw profile (.*) -XMLDoSURL (.*)",
+            "pattern" : "bind appfw profile {profile} -XMLDoSURL {name}{optional}",
+            "visible" : true,
+            "childdiscovery" : [{
+            }]
+        },
+        {
+            "objecttype" : "appfwprofile_excluderescontenttype_binding",
+            "groupname" : "APPFW: Exclude Response ContentType",
+            "identifier" : "bind appfw profile (.*) -excludeResContentType (.*)",
+            "pattern" : "bind appfw profile {profile} {optional}-excludeResContentType {name}",
+            "visible" : true,
+            "childdiscovery" : [{
+            }]
+        },
+
+        {
+            "objecttype" : "appfwprofile_xmlwsiurl_binding",
+            "groupname" : "APPFW: XML DoS URL",
+            "identifier" : "bind appfw profile (.*) -XMLWSIURL (.*)",
+            "pattern" : "bind appfw profile {profile} -XMLWSIURL {name}{optional}",
+            "visible" : true,
+            "childdiscovery" : [{
+            }]
+        },
     {
-        "objecttype" : "appfwprofile_starturl_binding",
-        "groupname" : "APPFW: Start URL",
-        "identifier" : "bind appfw profile (.*) -startURL (.*)",
-        "pattern" : "bind appfw profile {profile} -startURL {name}{optional}",
+        "objecttype" : "channel",
+        "groupname" : "Network: Channel",
+        "identifier" : "set channel (.*)",
+        "pattern" : "set channel {name} {optional}",
         "visible" : true,
         "key" : "name",
         "childdiscovery" : [{
         }]
     },
     {
-        "objecttype" : "appfwprofile_denyurl_binding",
-        "groupname" : "APPFW: Deny URL",
-        "identifier" : "bind appfw profile (.*) -denyURL (.*)",
-        "pattern" : "bind appfw profile {profile} -denyURL {name}{optional}",
+        "objecttype" : "interface",
+        "groupname" : "Network: Interface",
+        "identifier" : "set interface (.*)",
+        "pattern" : "set interface {name} {optional}",
         "visible" : true,
+        "key" : "name",
         "childdiscovery" : [{
         }]
     },
+
+        {
+            "objecttype" : "lbvserver",
+            "groupname" : "LB: Virtual Server",
+            "identifier" : "add lb vserver (.*)",
+            "pattern" : "add lb vserver {name} {protocol} {IP} {port} {optional}",
+            "visible" : true,
+            "childdiscovery" : [{
+                "type" : "lbvserver_servicegroup_binding",
+                "childproperty" : "name",
+                "parentproperty" : "name"
+            },
+            {
+                "type" : "lbvserver_binding",
+                "childproperty" : "lbvserver",
+                "parentproperty" : "name"
+            },
+            {
+                "type" : "nsip",
+                "childproperty" : "name",
+                "parentproperty" : "IP"
+            },
+            {
+                "type" : "sslvserver",
+                "childproperty" : "name",
+                "parentproperty" : "name"
+            },
+            {
+                "type" : "nstcpprofile",
+                "childproperty" : "name",
+                "parentproperty" : "tcpProfileName"
+            },
+            {
+                "type" : "nshttpprofile",
+                "childproperty" : "name",
+                "parentproperty" : "httpProfileName"
+            },
+            {
+                "type" : "lbvserver",
+                "childproperty" : "name",
+                "parentproperty" : "backupVServer"
+            },
+            {
+                "type" : "netprofile",
+                "childproperty" : "name",
+                "parentproperty" : "netProfile"
+            }
+
+
+        ]
+      },
     {
-        "objecttype" : "appfwprofile_xmlvalidationurl_binding",
-        "groupname" : "APPFW: XML Attachment URL",
-        "identifier" : "bind appfw profile (.*) -XMLValidationURL (.*)",
-        "pattern" : "bind appfw profile {profile} -XMLValidationURL {name}{optional}",
-        "visible" : true,
-        "childdiscovery" : [{
-        }]
-    },
-    {
-        "objecttype" : "appfwprofile_xmlattachmenturl_binding",
-        "groupname" : "APPFW: XML Attachment URL",
-        "identifier" : "bind appfw profile (.*) -XMLAttachmentURL (.*)",
-        "pattern" : "bind appfw profile {profile} -XMLAttachmentURL {name}{optional}",
-        "visible" : true,
-        "childdiscovery" : [{
-        }]
-    },
-    {
-        "objecttype" : "appfwprofile_xmldosurl_binding",
-        "groupname" : "APPFW: XML DoS URL",
-        "identifier" : "bind appfw profile (.*) -XMLDoSURL (.*)",
-        "pattern" : "bind appfw profile {profile} -XMLDoSURL {name}{optional}",
-        "visible" : true,
-        "childdiscovery" : [{
-        }]
-    },
-    {
-        "objecttype" : "appfwprofile_excluderescontenttype_binding",
-        "groupname" : "APPFW: Exclude Response ContentType",
-        "identifier" : "bind appfw profile (.*) -excludeResContentType (.*)",
-        "pattern" : "bind appfw profile {profile} {optional}-excludeResContentType {name}",
+        "objecttype" : "nsfeature",
+        "groupname" : "Features",
+        "identifier" : "enable ns feature (.*)",
+        "pattern" : "enable ns feature {name}",
         "visible" : true,
         "childdiscovery" : [{
         }]
     },
 
+        {
+            "objecttype" : "nsip",
+            "groupname" : "Network: IP",
+            "identifier" : "add ns ip (.*)",
+            "pattern" : "add ns ip {name} {subnet} {optional}",
+            "visible" : true,
+            "childdiscovery" : [{}]
+        },
     {
-        "objecttype" : "appfwprofile_xmlwsiurl_binding",
-        "groupname" : "APPFW: XML DoS URL",
-        "identifier" : "bind appfw profile (.*) -XMLWSIURL (.*)",
-        "pattern" : "bind appfw profile {profile} -XMLWSIURL {name}{optional}",
+        "objecttype" : "nsmode",
+        "groupname" : "Modes",
+        "identifier" : "enable ns mode (.*)",
+        "pattern" : "enable ns mode {name}",
+        "visible" : true,
+                "key" : "name",
+        "childdiscovery" : [{
+        }]
+    },
+    {
+        "objecttype" : "snmpalarm",
+        "groupname" : "SNMP: Alarm",
+        "identifier" : "set snmp alarm (.*)",
+        "pattern" : "set snmp alarm {name} {optional}",
         "visible" : true,
         "childdiscovery" : [{
         }]
     },
+
+        {
+            "objecttype" : "snmpcommunity",
+            "groupname" : "SNMP: Community",
+            "identifier" : "add snmp community (.*)",
+            "pattern" : "add snmp community {name} {permission}",
+            "visible" : true,
+            "childdiscovery" : [{
+            }]
+        },
+        {
+            "objecttype" : "snmpmanager",
+            "groupname" : "SNMP: Manager",
+            "identifier" : "add snmp manager (.*)",
+            "pattern" : "add snmp manager {name}",
+            "visible" : true,
+            "childdiscovery" : [{
+            }]
+        },
+        {
+            "objecttype" : "snmptrap",
+            "groupname" : "SNMP: Trap",
+            "identifier" : "add snmp trap (.*)",
+            "pattern" : "add snmp trap {type} {name} -communityName {community}",
+            "visible" : true,
+            "childdiscovery" : [{
+              "type" : "snmpcommunity",
+              "childproperty" : "name",
+              "parentproperty" : "community"
+            }]
+        },
+
     {
         "objecttype" : "vlan",
         "groupname" : "Network: VLAN",
@@ -228,112 +339,9 @@
           "parentproperty" : "nsip"
         }]
     },
-    {
-        "objecttype" : "nsfeature",
-        "groupname" : "Features",
-        "identifier" : "enable ns feature (.*)",
-        "pattern" : "enable ns feature {name}",
-        "visible" : true,
-        "childdiscovery" : [{
-        }]
-    },
-    {
-        "objecttype" : "snmpcommunity",
-        "groupname" : "SNMP: Community",
-        "identifier" : "add snmp community (.*)",
-        "pattern" : "add snmp community {name} {permission}",
-        "visible" : true,
-        "childdiscovery" : [{
-        }]
-    },
-    {
-        "objecttype" : "snmpmanager",
-        "groupname" : "SNMP: Manager",
-        "identifier" : "add snmp manager (.*)",
-        "pattern" : "add snmp manager {name}",
-        "visible" : true,
-        "childdiscovery" : [{
-        }]
-    },
-    {
-        "objecttype" : "snmpalarm",
-        "groupname" : "SNMP: Alarm",
-        "identifier" : "set snmp alarm (.*)",
-        "pattern" : "set snmp alarm {name} {optional}",
-        "visible" : true,
-        "childdiscovery" : [{
-        }]
-    },
-    {
-        "objecttype" : "snmptrap",
-        "groupname" : "SNMP: Trap",
-        "identifier" : "add snmp trap (.*)",
-        "pattern" : "add snmp trap {type} {name} -communityName {community}",
-        "visible" : true,
-        "childdiscovery" : [{
-          "type" : "snmpcommunity",
-          "childproperty" : "name",
-          "parentproperty" : "community"
-        }]
-    },
-    {
-        "objecttype" : "nsip",
-        "groupname" : "Network: IP",
-        "identifier" : "add ns ip (.*)",
-        "pattern" : "add ns ip {name} {subnet} {optional}",
-        "visible" : true,
-        "childdiscovery" : [{}]
-    },
-    {
-        "objecttype" : "lbvserver",
-        "groupname" : "LB: Virtual Server",
-        "identifier" : "add lb vserver (.*)",
-        "pattern" : "add lb vserver {name} {protocol} {IP} {port} {optional}",
-        "visible" : true,
-        "childdiscovery" : [{
-            "type" : "lbvserver_servicegroup_binding",
-            "childproperty" : "name",
-            "parentproperty" : "name"
-        },
-        {
-            "type" : "lbvserver_binding",
-            "childproperty" : "lbvserver",
-            "parentproperty" : "name"
-        },
-        {
-            "type" : "nsip",
-            "childproperty" : "name",
-            "parentproperty" : "IP"
-        },
-        {
-            "type" : "sslvserver",
-            "childproperty" : "name",
-            "parentproperty" : "name"
-        },
-        {
-            "type" : "nstcpprofile",
-            "childproperty" : "name",
-            "parentproperty" : "tcpProfileName"
-        },
-        {
-            "type" : "nshttpprofile",
-            "childproperty" : "name",
-            "parentproperty" : "httpProfileName"
-        },
-        {
-            "type" : "lbvserver",
-            "childproperty" : "name",
-            "parentproperty" : "backupVServer"
-        },
-        {
-            "type" : "netprofile",
-            "childproperty" : "name",
-            "parentproperty" : "netProfile"
-        }
 
 
-    ]
-  },
+
     {
         "objecttype" : "csvserver",
         "groupname" : "CS: Virtual Server",
@@ -667,6 +675,12 @@
             "type" : "policystringmap_pattern_binding",
             "childproperty" : "name",
             "parentproperty" : "name"
+        },
+        {
+            "type" : "lbvserver",
+            "childproperty" : "name",
+            "parentproperty" : "optional",
+            "textsearch" : "true"
         }]
     },
 
