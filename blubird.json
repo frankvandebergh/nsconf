@@ -1550,6 +1550,7 @@
         {
             "objecttype": "service_lbmonitor_binding",
             "groupname": "LB: Service monitor binding",
+            "diagramcolumn" : 3,
             "identifier": "bind service (.*) -monitorName (.*)",
             "pattern": "bind service {servicegroupname} -monitorName {monitor}",
             "visible": false,
@@ -1564,6 +1565,7 @@
         {
             "objecttype": "servicegroup_lbmonitor_binding",
             "groupname": "LB: Service Group monitor binding",
+            "diagramcolumn" : 3,
             "identifier": "bind serviceGroup (.*) -monitorName (.*)",
             "pattern": "bind serviceGroup {servicegroupname} -monitorName {monitor}",
             "visible": false,
@@ -1579,6 +1581,7 @@
             "objecttype": "servicegroup_servicegroupmember_binding",
             "groupname": "LB: Service Group srv binding",
             "identifier": "bind serviceGroup (.*)",
+            "diagramcolumn" : 3,
             "pattern": "bind servicegroup {servicegroupname} {server} {port}",
             "visible": false,
             "childdiscovery": [
@@ -1617,6 +1620,7 @@
             "objecttype": "lbvserver_servicegroup_binding",
             "groupname": "LB: Virtual Server svg binding",
             "identifier": "bind lb vserver (.*)",
+            "diagramcolumn" : 3,
             "pattern": "bind lb vserver {name} {svc}",
             "visible": false,
             "childdiscovery": [
