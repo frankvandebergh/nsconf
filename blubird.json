@@ -385,7 +385,7 @@
             "objecttype": "csvserver",
             "groupname": "CS: Virtual Server",
             "identifier": "add cs vserver (.*)",
-                                "diagramcolumn" : 2,
+                                "diagramcolumn" : 1,
             "pattern": "add cs vserver {name} {protocol} {IP} {port} {optional}",
             "visible": true,
             "childdiscovery": [
