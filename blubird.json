@@ -1496,6 +1496,7 @@
             "objecttype": "servicegroup",
             "groupname": "LB: Service Group",
             "identifier": "add serviceGroup (.*)",
+            "diagramcolumn" : 3,
             "pattern": "add servicegroup {name} {servicetype}{optional}",
             "visible": true,
             "childdiscovery": [
@@ -1525,6 +1526,7 @@
             "objecttype": "service",
             "groupname": "LB: Service",
             "identifier": "add service (.*)",
+            "diagramcolumn" : 3,
             "pattern": "add service {name} {server} {servicetype} {port}{optional}",
             "visible": true,
             "childdiscovery": [
