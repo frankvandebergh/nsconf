@@ -194,6 +194,80 @@
             ]
         },
         {
+            "objecttype": "tmsessionaction",
+            "groupname": "TM: Session Action",
+            "diagramcolumn" : 0,
+            "identifier": "add tm sessionAction (.*)",
+            "pattern": "add tm sessionAction {name}{optional}",
+            "visible": true,
+            "key": "name",
+            "childdiscovery": [
+
+            ]
+        },
+        {
+            "objecttype": "tmsessionpolicy",
+            "groupname": "TM: Session Policy",
+            "diagramcolumn" : 0,
+            "identifier": "add tm sessionPolicy (.*)",
+            "pattern": "add tm sessionPolicy {name} {rule} {action}{optional}",
+            "visible": true,
+            "key": "name",
+            "childdiscovery": [
+              {
+
+
+                      "type": "tmsessionaction",
+                      "childproperty": "name",
+                      "parentproperty": "action"
+
+              }
+
+            ]
+        },
+        {
+            "objecttype": "cspolicylabel",
+            "groupname": "CS: Policy Label",
+                                "diagramcolumn" : 0,
+            "identifier": "add cs policylabel (.*)",
+            "pattern": "add cs policylabel {name}{optional}",
+            "visible": true,
+            "key": "name",
+            "childdiscovery": [
+                {
+
+
+                        "type": "cspolicylabel_binding",
+                        "childproperty": "name",
+                        "parentproperty": "name"
+
+                }
+            ]
+        },
+        {
+            "objecttype": "cspolicylabel_binding",
+            "groupname": "CS: Policy Label binding",
+                                "diagramcolumn" : 0,
+            "identifier": "bind cs policylabel (.*)",
+            "pattern": "bind cs policylabel {name} {policy} {priority} -targetVserver {lbvserver}",
+            "visible": false,
+            "key": "name",
+            "childdiscovery": [
+              {
+                      "type": "lbvserver",
+                      "childproperty": "name",
+                      "parentproperty": "lbvserver"
+              },
+              {
+                      "type": "cspolicy",
+                      "childproperty": "name",
+                      "parentproperty": "policy"
+              }
+
+            ]
+        },
+
+        {
             "objecttype": "interface",
             "groupname": "Network: Interface",
                                 "diagramcolumn" : 0,
@@ -443,6 +517,23 @@
                 {}
             ]
         },
+        {
+            "objecttype": "authenticationvserver_vpnportaltheme_binding",
+            "groupname": "AAA: Portal Theme",
+            "diagramcolumn" : 0,
+            "identifier": "bind authentication vserver (.*) -portaltheme (.*)",
+            "pattern": "bind authentication vserver {name} -portaltheme {vpnportaltheme}",
+            "visible": false,
+            "childdiscovery": [
+                {
+                  "type": "vpnportaltheme",
+                  "childproperty": "name",
+                  "parentproperty": "vpnportaltheme"
+
+                }
+            ]
+        },
+
         {
             "objecttype": "policyhttpcallout",
             "groupname": "Policy: HTTP Callout",
