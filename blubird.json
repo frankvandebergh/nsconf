@@ -48,6 +48,12 @@
                     "childproperty": "name",
                     "parentproperty": "rule",
                     "textsearch": "true"
+                },
+                {
+                  "type": "policyhttpcallout",
+                  "childproperty": "name",
+                  "parentproperty": "rule",
+                  "textsearch": "true"
                 }
             ]
         },
@@ -438,6 +444,39 @@
             ]
         },
         {
+            "objecttype": "policyhttpcallout",
+            "groupname": "Policy: HTTP Callout",
+            "identifier": "add policy httpCallout (.*)",
+            "pattern": "add policy httpCallout {name} -vServer {vserver} {optional}",
+            "visible": true,
+            "childdiscovery": [
+              {
+                      "type": "lbvserver",
+                      "childproperty": "name",
+                      "parentproperty": "vserver"
+
+                },
+                {
+                    "type": "policystringmap",
+                    "childproperty": "name",
+                    "parentproperty": "optional",
+                    "textsearch": "true"
+                },
+                {
+                    "type": "policypatset",
+                    "childproperty": "name",
+                    "parentproperty": "optional",
+                    "textsearch": "true"
+                },
+                {
+                    "type": "policyexpression",
+                    "childproperty": "name",
+                    "parentproperty": "optional",
+                    "textsearch": "true"
+                }
+            ]
+        },
+        {
             "objecttype": "authenticationauthnprofile",
             "groupname": "AAA: Authentication Profile",
                                 "diagramcolumn" : 2,
@@ -679,6 +718,12 @@
                     "childproperty": "name",
                     "parentproperty": "rule",
                     "textsearch": "true"
+                },
+                {
+                  "type": "policyhttpcallout",
+                  "childproperty": "name",
+                  "parentproperty": "rule",
+                  "textsearch": "true"
                 }
             ]
         },
@@ -794,6 +839,12 @@
                     "childproperty": "name",
                     "parentproperty": "expression",
                     "textsearch": "true"
+                },
+                {
+                  "type": "policyhttpcallout",
+                  "childproperty": "name",
+                  "parentproperty": "rule",
+                  "textsearch": "true"
                 }
             ]
         },
@@ -1665,6 +1716,12 @@
                     "childproperty": "name",
                     "parentproperty": "rule",
                     "textsearch": "true"
+                },
+                {
+                  "type": "policyhttpcallout",
+                  "childproperty": "name",
+                  "parentproperty": "rule",
+                  "textsearch": "true"
                 }
             ]
         },
@@ -1712,6 +1769,12 @@
                     "childproperty": "name",
                     "parentproperty": "rule",
                     "textsearch": "true"
+                },
+                {
+                  "type": "policyhttpcallout",
+                  "childproperty": "name",
+                  "parentproperty": "rule",
+                  "textsearch": "true"
                 }
             ]
         },
