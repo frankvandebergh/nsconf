@@ -1758,7 +1758,7 @@
                 }
               ,
                   {
-                      "type": "rewritepolicylabel_binding",
+                      "type": "rewritepolicylabel",
                       "childproperty": "name",
                       "parentproperty": "optional",
                       "textsearch": "true"
